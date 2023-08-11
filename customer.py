@@ -17,6 +17,7 @@ class customer:
         self.balance  -= amount
         traid = str(self.id) + str(datetime.now())
         self.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"dr",self.balance, "withdrawal"))
+        return True
 
 
     def deposit(self,amount):
@@ -24,6 +25,7 @@ class customer:
         self.balance  += amount
         traid = str(self.id) + str(datetime.now())
         self.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"cr",self.balance, "deposit"))
+        return True
         
     
     def transfer(self):
