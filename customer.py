@@ -8,8 +8,30 @@ class customer:
         self.id = id
         self.name = name
         self.balance = balance
+    
+    def getTransaction(self):
+        
+        # Check if the transaction list is empty
+        if len(self.transactionlist) == 0:
+            print("No transactions found.")
+        else:
+        # Get the last ten transactions or all transactions if less than ten
+            last_ten_transactions = self.transactionlist[-10:]
+
+        # Loop through the transactions
+        for transaction in last_ten_transactions:
+            print("Date:", tr.transaction.date)
+            print("ID:", tr.transaction.id)
+            print("Amount:", tr.transaction.amount)
+            print("CR/DR:", tr.transaction.crdr)
+            print("Balance:", tr.transaction.balance)
+            print("Description:", tr.transaction.description)
+            print("-----------------------")
+  
+    
     def showbalance(self):
         return self.balance
+    
     def withdraw(self,amount):
         if amount > self.balance:
             print("Not enough balance")
@@ -35,11 +57,11 @@ class customer:
                 return False
             self.balance  -= amount
             traid = str(self.id) + str(datetime.now())
-            self.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"dr",self.balance, "transfer"))
+            self.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"dr",self.balance, "transfer (sender)"))
             recip.transfer(-abs(amount),self)
         else: 
             self.balance  += amount
             traid = str(self.id) + str(datetime.now())
-            self.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"cr",self.balance, "transfer"))
+            self.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"cr",self.balance, "transfer (recipient)"))
         return True
 
