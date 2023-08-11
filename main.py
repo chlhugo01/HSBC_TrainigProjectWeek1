@@ -1,18 +1,50 @@
-import customer
+import account
 import transaction
-
+import transfunctions
+import customer
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
 def day_1():
-    cus1 = customer.customer(1,"Hugo",0)
-    cus2 = customer.customer(2, "Cora", 0)
-    cus3 = customer.customer(3, "John", 0)
-    cus4 = customer.customer(4, "Alvin", 0)
-    cus5 = customer.customer(5, "Bell", 0)
-    cus = input('Which customer are you?')
+    """""
+    cuslist = [{"id":1,"name":"Hugo","balance":0},
+               {"id":2,"name":"Cora","balance":0},
+               {"id":3,"name":"John","balance":0},
+               {"id":4,"name":"Alvin","balance":0},
+               {"id":5,"name":"Bell","balance":0}
+            ]
+    
+    cclasslist=[]
+    
+    for i in range(len(cuslist)):
+        temp = customer.customer(cus[i]["id"],cus[i]["name"],cus[i]["balance"])
+        cclasslist.append(temp)
+    
+    """
+    cus1 = customer.customer(1,"Hugo","test@gmail.com","hsbc")
+    cus1.accountList.append(account.account(1,0))
+    cus2 = customer.customer(2, "Cora", "test@gmail.com","hsbc")
+    cus2.accountList.append(account.account(2,0))
+    cus3 = customer.customer(3, "John", "test@gmail.com","hsbc")
+    cus3.accountList.append(account.account(3,0))
+    cus4 = customer.customer(4, "Alvin", "test@gmail.com","hsbc")
+    cus4.accountList.append(account.account(4,0))
+    cus5 = customer.customer(5, "Bell", "test@gmail.com","hsbc")
+    cus5.accountList.append(account.account(5,0))
+    #cus5.accountList.append(6)
+    
+    
+    cus = input('Please enter your customer ID:')
+    
+    """""
+    for i in range(len(cclasslist)):
+            temp = customer.customer(cus[i]["id"],cus[i]["name"],cus[i]["balance"])
+            cclasslist.append(temp)
+    
+    """""
+    
     if cus == "cus1":
         cus = cus1
     elif cus == "cus2":
@@ -23,6 +55,8 @@ def day_1():
         cus = cus4
     elif cus == "cus5":
         cus = cus5
+    
+    
     while 1:
         choice = int(input('''Welcome to the bank system?
           Please state your action
@@ -35,8 +69,8 @@ def day_1():
           ''' ))
 
         if choice == 1:
-            print(cus.showbalance())
-            print("Your balance:  " + str(cus.showbalance()))
+            print(cus.accountList[0].showbalance())
+            print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
         elif choice == 2:
             withdrawamount = int(input("How much you want to withdraw"))
             if cus.withdraw(withdrawamount):
