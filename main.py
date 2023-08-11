@@ -12,19 +12,18 @@ def day_1():
     cus3 = customer.customer(3, "John", 0)
     cus4 = customer.customer(4, "Alvin", 0)
     cus5 = customer.customer(5, "Bell", 0)
+    cus = input('Which customer are you?')
+    if cus == "cus1":
+        cus = cus1
+    elif cus == "cus2":
+        cus = cus2
+    elif cus == "cus3":
+        cus = cus3
+    elif cus == "cus4":
+        cus = cus4
+    elif cus == "cus5":
+        cus = cus5
     while 1:
-        cus = input('Which customer are you?')
-        if customer == "cus1":
-            cus = cus1
-        elif customer == "cus2":
-            cus = cus2
-        elif customer == "cus3":
-            cus = cus3
-        elif customer == "cus4":
-            cus = cus4
-        elif customer == "cus5":
-            cus = cus5
-
         choice = int(input('''Welcome to the bank system?
           Please state your action
           - 1: Show Balance
@@ -36,6 +35,7 @@ def day_1():
           ''' ))
 
         if choice == 1:
+            print(cus.showbalance())
             print("Your balance:  " + str(cus.showbalance()))
         elif choice == 2:
             withdrawamount = int(input("How much you want to withdraw"))
@@ -49,8 +49,8 @@ def day_1():
             cus.deposit(depositamount)
             print("Your balance:  " + str(cus.showbalance()))
             print("You withdraw" + str(depositamount))
-
-
+        elif choice == 5:
+            cus.getTransaction()
         elif choice ==6:
             break
 

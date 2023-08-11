@@ -20,17 +20,16 @@ class customer:
 
         # Loop through the transactions
         for transaction in last_ten_transactions:
-            print("Date:", tr.transaction.date)
-            print("ID:", tr.transaction.id)
-            print("Amount:", tr.transaction.amount)
-            print("CR/DR:", tr.transaction.crdr)
-            print("Balance:", tr.transaction.balance)
-            print("Description:", tr.transaction.description)
+            print("Date:", transaction.date)
+            print("ID:", transaction.id)
+            print("Amount:", transaction.amount)
+            print("CR/DR:", transaction.crdr)
+            print("Balance:", transaction.balance)
+            print("Description:", transaction.description)
             print("-----------------------")
-  
-    
+
     def showbalance(self):
-        return self.balance
+        return int(self.balance)
     
     def withdraw(self,amount):
         if amount > self.balance:
