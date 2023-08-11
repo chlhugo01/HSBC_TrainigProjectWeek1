@@ -10,7 +10,6 @@ def day_1():
           - 3
           - 4
           ''' )
-    while
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
