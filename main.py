@@ -49,6 +49,24 @@ def day_1():
             cus.deposit(depositamount)
             print("Your balance:  " + str(cus.showbalance()))
             print("You withdraw" + str(depositamount))
+        elif choice==4:
+            transferamount = int(input("How much you want to transfer"))
+            recip=input("Who do you want to transfer to?")
+            if recip == "cus1":
+                recip = cus1
+            elif recip == "cus2":
+                    recip = cus2
+            elif recip == "cus3":
+                    recip = cus3
+            elif recip == "cus4":
+                    recip = cus4
+            elif recip == "cus5":
+                    recip = cus5
+            cus.transfer(transferamount,recip)
+            
+            print("Your balance:  " + str(cus.showbalance()))
+            print("You transferred " + str(transferamount)+" to "+recip.name)
+            
         elif choice == 5:
             cus.getTransaction()
         elif choice ==6:
