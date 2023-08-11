@@ -26,7 +26,18 @@ class customer:
         self.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"cr",self.balance, "deposit"))
         
     
-    def transfer(self):
-
+    def transfer(self,amount,recip):
+        if amount>0:
+            if amount > self.balance:
+                print("Not enough balance")
+                return False
+            self.balance  -= amount
+            traid = str(self.id) + str(datetime.now())
+            self.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"dr",self.balance, "transfer"))
+            recip.transfer(-abs(amount),self)
+        else: 
+            self.balance  += amount
+            traid = str(self.id) + str(datetime.now())
+            self.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"cr",self.balance, "transfer"))
         return True
 
