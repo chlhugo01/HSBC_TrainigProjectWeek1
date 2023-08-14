@@ -95,12 +95,12 @@ def day_1():
                 
             print("Please select an account:")
             
-            for i in range(len(cus.accountList)):
+            for i in range(len(recip.accountList)):
                 
-                print(str(i)+": "+cus.accountList[i].name)
+                print(str(i)+": "+recip.accountList[i].name)
             
             accid=input()
-            recipacc = cus.accountList[int(accid)]
+            recipacc = recip.accountList[int(accid)]
             
 
             transferamount = int(input("How much you want to transfer"))
