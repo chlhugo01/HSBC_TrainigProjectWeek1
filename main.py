@@ -69,7 +69,7 @@ def day_1():
           ''' ))
 
         if choice == 1:
-            print(cus.accountList[0].showbalance())
+            print(transfunctions.showbalance(cus.accountList[0]))
             print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
         elif choice == 2:
             withdrawamount = int(input("How much you want to withdraw"))
