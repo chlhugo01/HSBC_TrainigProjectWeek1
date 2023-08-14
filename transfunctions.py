@@ -53,7 +53,7 @@ def transfer(amount,sender,recip):
         sender.balance  -= amount
         traid = str(sender.id) + str(datetime.now())
         sender.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"dr",sender.balance, "transfer (sender)"))
-        transfer(-abs(amount),recip,sender)
+        transfer(-abs(amount),sender,recip)
     else: 
         recip.balance  += amount
         traid = str(recip.id) + str(datetime.now())

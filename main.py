@@ -8,54 +8,27 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
 def day_1():
-    """""
-    cuslist = [{"id":1,"name":"Hugo","balance":0},
-               {"id":2,"name":"Cora","balance":0},
-               {"id":3,"name":"John","balance":0},
-               {"id":4,"name":"Alvin","balance":0},
-               {"id":5,"name":"Bell","balance":0}
-            ]
-    
-    cclasslist=[]
-    
-    for i in range(len(cuslist)):
-        temp = customer.customer(cus[i]["id"],cus[i]["name"],cus[i]["balance"])
+    cuslist = [{"id": 1, "name": "Hugo",'email':"hugo@gmail.com",'address':'hsbc' },
+               {"id": 2, "name": "Cora", 'email':"Cora@gmail.com",'address':'hsbc'},
+               {"id": 3, "name": "John", 'email':"John@gmail.com",'address':'hsbc'},
+               {"id": 4, "name": "Alvin", 'email':"Alvin@gmail.com",'address':'hsbc'},
+               {"id": 5, "name": "Bell",'email':"Bell@gmail.com",'address':'hsbc' }
+               ]
+    cclasslist = []
+
+    for i in range(0,len(cuslist)):
+        temp = ct.customer(i+1 , cuslist[i]["name"],cuslist[i]['email'],cuslist[i]['address'])
+        temp.accountList.append(ac.account(i+1,0))   # account id same as customer id
         cclasslist.append(temp)
-    
-    """
-    cus1 = ct.customer(1,"Hugo","test@gmail.com","hsbc")
-    cus1.accountList.append(ac.account(1,0))
-    cus2 = ct.customer(2, "Cora", "test@gmail.com","hsbc")
-    cus2.accountList.append(ac.account(2,0))
-    cus3 = ct.customer(3, "John", "test@gmail.com","hsbc")
-    cus3.accountList.append(ac.account(3,0))
-    cus4 = ct.customer(4, "Alvin", "test@gmail.com","hsbc")
-    cus4.accountList.append(ac.account(4,0))
-    cus5 = ct.customer(5, "Bell", "test@gmail.com","hsbc")
-    cus5.accountList.append(ac.account(5,0))
-    #cus5.accountList.append(6)
-    
-    
-    cus = input('Please enter your customer ID:')
-    
-    """""
+
+    cus = input('Please enter your customer name:')
     for i in range(len(cclasslist)):
-            temp = customer.customer(cus[i]["id"],cus[i]["name"],cus[i]["balance"])
-            cclasslist.append(temp)
-    
-    """""
-    
-    if cus == "cus1":
-        cus = cus1
-    elif cus == "cus2":
-        cus = cus2
-    elif cus == "cus3":
-        cus = cus3
-    elif cus == "cus4":
-        cus = cus4
-    elif cus == "cus5":
-        cus = cus5
-    
+        if(cclasslist[i].name == cus):
+            cus = cclasslist[i]
+            break;
+        else:
+            print("no customer found")
+            exit()
     
     while 1:
         choice = int(input('''Welcome to the bank system?
@@ -84,35 +57,26 @@ def day_1():
             trfun.deposit(depositamount,cus.accountList[0])
             print("Your balance:  " + str(trfun.showbalance(cus.accountList[0])))
             print("You withdraw" + str(depositamount))
-            
+
         elif choice==4:
             transferamount = int(input("How much you want to transfer"))
             recip=input("Who do you want to transfer to?")
-            if recip == "cus1":
-                recip = cus1
-            elif recip == "cus2":
-                    recip = cus2
-            elif recip == "cus3":
-                    recip = cus3
-            elif recip == "cus4":
-                    recip = cus4
-            elif recip == "cus5":
-                    recip = cus5
+
+            for i in range(len(cclasslist)):
+                if (cclasslist[i].name == recip):
+                    recip = cclasslist[i]
+                    break;
+
             trfun.transfer(transferamount,cus.accountList[0],recip.accountList[0])
             
             print("Your balance:  " + str(trfun.showbalance(cus.accountList[0])))
             print("You transferred " + str(transferamount)+" to "+recip.name)
-            
+
         elif choice == 5:
             trfun.getTransaction(cus.accountList[0])
         elif choice ==6:
             break
 
-    """
-    customer A 500 to customer B
-    A.transfer( -500 ,B)
-    B.transfer(B, +500)
-    """
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
