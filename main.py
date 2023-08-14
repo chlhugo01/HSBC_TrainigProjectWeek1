@@ -26,7 +26,7 @@ def day_1():
     cus = input('Please enter your customer name:')
     
     for i in range(len(cclasslist)):
-        if(cclasslist[i].name == cus):
+        if(cclasslist[i].get_name() == cus):
             cus = cclasslist[i]
             found=True
             break
@@ -37,12 +37,14 @@ def day_1():
         
     print("Please select an account")
     
-    for i in range(len(cus.accountList)):
+    acclist = cus.get_accountList()
+    
+    for i in range(len(acclist)):
         
-        print(str(i)+": "+cus.accountList[i].name)
+        print(str(i)+": "+acclist[i].get_name())
     
     accid=input()
-    sdac = cus.accountList[int(accid)]
+    sdac = acclist[int(accid)]
     
     
     
@@ -84,7 +86,7 @@ def day_1():
             found=False
                     
             for i in range(len(cclasslist)):
-                if(cclasslist[i].name == recip):
+                if(cclasslist[i].get_name() == recip):
                     recip = cclasslist[i]
                     found=True
                     break
@@ -95,12 +97,14 @@ def day_1():
                 
             print("Please select an account:")
             
-            for i in range(len(recip.accountList)):
+            racclist=recip.accountList
+            
+            for i in range(len(racclist)):
                 
-                print(str(i)+": "+recip.accountList[i].name)
+                print(str(i)+": "+racclist[i].get_name())
             
             accid=input()
-            recipacc = recip.accountList[int(accid)]
+            recipacc = racclist[int(accid)]
             
 
             transferamount = int(input("How much you want to transfer"))
@@ -108,7 +112,7 @@ def day_1():
             trfun.transfer(transferamount,sdac,recipacc)
             
             print("Your balance:  " + str(trfun.showbalance(sdac)))
-            print("You transferred " + str(transferamount)+" to "+recip.name)
+            print("You transferred " + str(transferamount)+" to "+recip.get_name())
 
         elif choice == 5:
             trfun.getTransaction(sdac)
