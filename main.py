@@ -63,7 +63,7 @@ def day_1():
             print(trfun.showbalance(sdac))
             print("Your balance:  " + str(trfun.showbalance(sdac)))
         elif choice == 2:
-            withdrawamount = int(input("How much you want to withdraw"))
+            withdrawamount = int(input("How much you want to withdraw:"))
             if trfun.withdraw(withdrawamount,sdac):
                 print("Your balance:  " + str(trfun.showbalance(sdac)))
                 print("You withdraw" + str(withdrawamount))
