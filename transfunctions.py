@@ -14,14 +14,14 @@ def getTransaction(account):
             last_ten_transactions = account.transactionlist[-10:]
 
         # Loop through the transactions
-        for transaction in last_ten_transactions:
-            print("Date:", transaction.date)
-            print("ID:", transaction.id)
-            print("Amount:", transaction.amount)
-            print("CR/DR:", transaction.crdr)
-            print("Balance:", transaction.balance)
-            print("Description:", transaction.description)
-            print("-----------------------")
+            for transaction in last_ten_transactions:
+                print("Date:", transaction.date)
+                print("ID:", transaction.id)
+                print("Amount:", transaction.amount)
+                print("CR/DR:", transaction.crdr)
+                print("Balance:", transaction.balance)
+                print("Description:", transaction.description)
+                print("-----------------------")
 
 def showbalance(account):
     #print(account.balance)
@@ -32,7 +32,7 @@ def withdraw(amount,account):
         print("Not enough balance")
         return False
     account.balance  -= amount
-    traid = str(self.id) + str(datetime.now())
+    traid = str(account.id) + str(datetime.now())
     account.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"dr",account.balance, "withdrawal"))
     return True
 
@@ -51,9 +51,9 @@ def transfer(amount,sender,recip):
             print("Not enough balance")
             return False
         sender.balance  -= amount
-        traid = str(account.id) + str(datetime.now())
+        traid = str(sender.id) + str(datetime.now())
         sender.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"dr",sender.balance, "transfer (sender)"))
-        recip.transfer(-abs(amount),sender)
+        transfer(-abs(amount),recip,sender)
     else: 
         recip.balance  += amount
         traid = str(recip.id) + str(datetime.now())

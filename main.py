@@ -73,16 +73,18 @@ def day_1():
             print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
         elif choice == 2:
             withdrawamount = int(input("How much you want to withdraw"))
-            if cus.withdraw(withdrawamount):
-                print("Your balance:  " + str(cus.showbalance()))
+            if transfunctions.withdraw(withdrawamount,cus.accountList[0]):
+                print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
                 print("You withdraw" + str(withdrawamount))
             else:
                 print("Your withdrawal is not approved, not enough balance")
         elif choice == 3:
+            
             depositamount = int(input("How much you want to deposit"))
-            cus.deposit(depositamount)
-            print("Your balance:  " + str(cus.showbalance()))
+            transfunctions.deposit(depositamount,cus.accountList[0])
+            print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
             print("You withdraw" + str(depositamount))
+            
         elif choice==4:
             transferamount = int(input("How much you want to transfer"))
             recip=input("Who do you want to transfer to?")
@@ -96,13 +98,13 @@ def day_1():
                     recip = cus4
             elif recip == "cus5":
                     recip = cus5
-            cus.transfer(transferamount,recip)
+            transfunctions.transfer(transferamount,cus.accountList[0],recip.accountList[0])
             
-            print("Your balance:  " + str(cus.showbalance()))
+            print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
             print("You transferred " + str(transferamount)+" to "+recip.name)
             
         elif choice == 5:
-            cus.getTransaction()
+            transfunctions.getTransaction(cus.accountList[0])
         elif choice ==6:
             break
 
