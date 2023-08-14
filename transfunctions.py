@@ -1,5 +1,5 @@
-import account
-import customer
+import account as ac
+import customer as ct
 import transaction as tr
 from datetime import datetime
 

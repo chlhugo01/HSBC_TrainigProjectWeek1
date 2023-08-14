@@ -1,7 +1,7 @@
-import account
-import transaction
-import transfunctions
-import customer
+import account as ac
+import transaction as tr
+import transfunctions as trfun
+import customer as ct
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -23,16 +23,16 @@ def day_1():
         cclasslist.append(temp)
     
     """
-    cus1 = customer.customer(1,"Hugo","test@gmail.com","hsbc")
-    cus1.accountList.append(account.account(1,0))
-    cus2 = customer.customer(2, "Cora", "test@gmail.com","hsbc")
-    cus2.accountList.append(account.account(2,0))
-    cus3 = customer.customer(3, "John", "test@gmail.com","hsbc")
-    cus3.accountList.append(account.account(3,0))
-    cus4 = customer.customer(4, "Alvin", "test@gmail.com","hsbc")
-    cus4.accountList.append(account.account(4,0))
-    cus5 = customer.customer(5, "Bell", "test@gmail.com","hsbc")
-    cus5.accountList.append(account.account(5,0))
+    cus1 = ct.customer(1,"Hugo","test@gmail.com","hsbc")
+    cus1.accountList.append(ac.account(1,0))
+    cus2 = ct.customer(2, "Cora", "test@gmail.com","hsbc")
+    cus2.accountList.append(ac.account(2,0))
+    cus3 = ct.customer(3, "John", "test@gmail.com","hsbc")
+    cus3.accountList.append(ac.account(3,0))
+    cus4 = ct.customer(4, "Alvin", "test@gmail.com","hsbc")
+    cus4.accountList.append(ac.account(4,0))
+    cus5 = ct.customer(5, "Bell", "test@gmail.com","hsbc")
+    cus5.accountList.append(ac.account(5,0))
     #cus5.accountList.append(6)
     
     
@@ -69,20 +69,20 @@ def day_1():
           ''' ))
 
         if choice == 1:
-            print(transfunctions.showbalance(cus.accountList[0]))
-            print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
+            print(trfun.showbalance(cus.accountList[0]))
+            print("Your balance:  " + str(trfun.showbalance(cus.accountList[0])))
         elif choice == 2:
             withdrawamount = int(input("How much you want to withdraw"))
-            if transfunctions.withdraw(withdrawamount,cus.accountList[0]):
-                print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
+            if trfun.withdraw(withdrawamount,cus.accountList[0]):
+                print("Your balance:  " + str(trfun.showbalance(cus.accountList[0])))
                 print("You withdraw" + str(withdrawamount))
             else:
                 print("Your withdrawal is not approved, not enough balance")
         elif choice == 3:
             
             depositamount = int(input("How much you want to deposit"))
-            transfunctions.deposit(depositamount,cus.accountList[0])
-            print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
+            trfun.deposit(depositamount,cus.accountList[0])
+            print("Your balance:  " + str(trfun.showbalance(cus.accountList[0])))
             print("You withdraw" + str(depositamount))
             
         elif choice==4:
@@ -98,13 +98,13 @@ def day_1():
                     recip = cus4
             elif recip == "cus5":
                     recip = cus5
-            transfunctions.transfer(transferamount,cus.accountList[0],recip.accountList[0])
+            trfun.transfer(transferamount,cus.accountList[0],recip.accountList[0])
             
-            print("Your balance:  " + str(transfunctions.showbalance(cus.accountList[0])))
+            print("Your balance:  " + str(trfun.showbalance(cus.accountList[0])))
             print("You transferred " + str(transferamount)+" to "+recip.name)
             
         elif choice == 5:
-            transfunctions.getTransaction(cus.accountList[0])
+            trfun.getTransaction(cus.accountList[0])
         elif choice ==6:
             break
 
