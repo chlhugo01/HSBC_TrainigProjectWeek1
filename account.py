@@ -8,6 +8,12 @@ class account:
         self.__id = id
         self.__name = name
         self.__balance = balance
+    
+    def set_transactionList(self,transaction):
+        self.__transactionlist.append(transaction)
+        
+    def set_balance(self,bal):
+        self.__balance=bal
       
     def get_transactionlist(self):
         return self.__transactionlist

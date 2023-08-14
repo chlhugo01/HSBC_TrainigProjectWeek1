@@ -18,7 +18,7 @@ def day_1():
 
     for i in range(0,len(cuslist)):
         temp = ct.customer(i+1 , cuslist[i]["name"],cuslist[i]['email'],cuslist[i]['address'])
-        temp.accountList.append(ac.account(i+1, "Savings", 0))   # account id same as customer id
+        temp.set_accountList(ac.account(i+1, "Savings", 0))   # account id same as customer id
         #temp.accountList.append(ac.account(i+2, "Current", 0)) 
         cclasslist.append(temp)
     

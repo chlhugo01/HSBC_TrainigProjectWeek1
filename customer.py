@@ -7,7 +7,9 @@ class customer:
         self.__email = email
         self.__address = address
 
-       
+    def set_accountList(self,account):
+        self.__accountList.append(account)
+        
 
     def get_accountList(self):
         return self.__accountList
