@@ -97,7 +97,7 @@ def day_1():
                 
             print("Please select an account:")
             
-            racclist=recip.accountList
+            racclist=recip.get_accountList()
             
             for i in range(len(racclist)):
                 

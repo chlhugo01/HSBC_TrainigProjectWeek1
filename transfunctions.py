@@ -7,55 +7,62 @@ from datetime import datetime
 def getTransaction(account):
         
         # Check if the transaction list is empty
-        if len(account.transactionlist) == 0:
+        if len(account.get_transactionlist()) == 0:
             print("No transactions found.")
         else:
         # Get the last ten transactions or all transactions if less than ten
-            last_ten_transactions = account.transactionlist[-10:]
+            last_ten_transactions = account.get_transactionlist()[-10:]
 
         # Loop through the transactions
             for transaction in last_ten_transactions:
-                print("Date:", transaction.date)
-                print("ID:", transaction.id)
-                print("Amount:", transaction.amount)
-                print("CR/DR:", transaction.crdr)
-                print("Balance:", transaction.balance)
-                print("Description:", transaction.description)
+                print("Date:", transaction.get_date())
+                print("ID:", transaction.get_id())
+                print("Amount:", transaction.get_amount())
+                print("CR/DR:", transaction.get_crdr())
+                print("Balance:", transaction.get_balance())
+                print("Description:", transaction.get_description())
                 print("-----------------------")
 
 def showbalance(account):
     #print(account.balance)
-    return str(account.balance)
+    return str(account.get_balance())
 
 def withdraw(amount,account):
-    if amount > account.balance:
+    accbal =  account.get_balance()
+    if amount > accbal:
         print("Not enough balance")
         return False
-    account.balance  -= amount
-    traid = str(account.id) + str(datetime.now())
-    account.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"dr",account.balance, "withdrawal"))
+    accbal  -= amount
+    account.set_balance(accbal)
+    traid = str(account.get_id()) + str(datetime.now())
+    account.set_transactionList(tr.transaction(datetime.now(),traid,amount,"dr",account.get_balance(), "withdrawal"))
     return True
 
 
 def deposit(amount,account):
-    
-    account.balance += amount
-    traid = str(account.id) + str(datetime.now())
-    account.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"cr",account.balance, "deposit"))
+    accbal = account.get_balance()
+    accbal += amount
+    account.set_balance(accbal)
+    traid = str(account.get_id()) + str(datetime.now())
+    account.set_transactionList(tr.transaction(datetime.now(),traid,amount,"cr",account.get_balance(), "deposit"))
     return True
     
 
 def transfer(amount,sender,recip):
     if amount>0:
-        if amount > sender.balance:
+        senbal = sender.get_balance()
+        if amount > senbal:
             print("Not enough balance")
             return False
-        sender.balance  -= amount
-        traid = str(sender.id) + str(datetime.now())
-        sender.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"dr",sender.balance, "transfer (sender)"))
+        senbal  -= amount
+        sender.set_balance(senbal)
+        traid = str(sender.get_id()) + str(datetime.now())
+        sender.set_transactionList(tr.transaction(datetime.now(),traid,amount,"dr",sender.get_balance(), "transfer (sender)"))
         transfer(-abs(amount),sender,recip)
-    else: 
-        recip.balance  += amount
-        traid = str(recip.id) + str(datetime.now())
-        recip.transactionlist.append(tr.transaction(datetime.now(),traid,amount,"cr",recip.balance, "transfer (recipient)"))
+    else:
+        rec = recip.get_balance()
+        rec  += amount
+        recip.set_balance(rec)
+        traid = str(recip.get_id()) + str(datetime.now())
+        recip.set_transactionList(tr.transaction(datetime.now(),traid,amount,"cr",recip.get_balance(), "transfer (recipient)"))
     return True
