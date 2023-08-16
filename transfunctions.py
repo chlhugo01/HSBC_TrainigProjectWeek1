@@ -2,6 +2,7 @@ import account as ac
 import customer as ct
 import transaction as tr
 from datetime import datetime
+import database as db
 
 
 def getTransaction(account):
@@ -23,19 +24,20 @@ def getTransaction(account):
                 print("Description:", transaction.get_description())
                 print("-----------------------")
 
-def showbalance(account):
+def showbalance(connection,AccID):
     #print(account.balance)
-    return str(account.get_balance())
+    query1 = 'Select * from account where AccID=' + str(AccID)
+    result = db.execute_read_query(connection, query1)
+    return result[0]
 
-def withdraw(amount,account):
-    accbal =  account.get_balance()
-    if amount > accbal:
-        print("Not enough balance")
-        return False
-    accbal  -= amount
-    account.set_balance(accbal)
-    traid = str(account.get_id()) + str(datetime.now())
-    account.set_transactionList(tr.transaction(datetime.now(),traid,amount,"dr",account.get_balance(), "withdrawal"))
+def withdraw(connection,amount,balance,AccID):
+    newbalance = balance-amount
+    print(newbalance)
+    query1 = 'update account set balance = ' + str(newbalance) +' where AccID = ' + str(AccID)
+   # Fix Bug query2 = 'insert into transaction(TrID,Amount,CRDR,Balance,Description,AccID) VALUES' + '(1,amount,DR,balance-amount,Withdraw,AccID)'
+    db.execute_read_query(connection, query1)
+    db.execute_read_query(connection, query2)
+
     return True
 
 

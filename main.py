@@ -2,12 +2,30 @@ import account as ac
 import transaction as tr
 import transfunctions as trfun
 import customer as ct
+import database as db
+import mysql.connector
+from mysql.connector import Error
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
 def day_1():
+    connection = db.create_connection('127.0.0.1', 'bankserver', 'root', 'Clch2811!')
+    '''
+    query = """
+            SELECT first_name, last_name, count(*) films
+            FROM actor AS a
+            JOIN film_actor AS fa USING (actor_id)
+            GROUP BY actor_id, first_name, last_name
+            ORDER BY films DESC
+        """
+    films = db.execute_read_query(connection, query)
+
+    for film in films:
+        print(film)
+
+
     cuslist = [{"id": 1, "name": "Hugo",'email':"hugo@gmail.com",'address':'hsbc' },
                {"id": 2, "name": "Cora", 'email':"Cora@gmail.com",'address':'hsbc'},
                {"id": 3, "name": "John", 'email':"John@gmail.com",'address':'hsbc'},
@@ -19,32 +37,20 @@ def day_1():
     for i in range(0,len(cuslist)):
         temp = ct.customer(i+1 , cuslist[i]["name"],cuslist[i]['email'],cuslist[i]['address'])
         temp.set_accountList(ac.account(i+1, "Savings", 0))   # account id same as customer id
-        #temp.accountList.append(ac.account(i+2, "Current", 0)) 
         cclasslist.append(temp)
-    
+
+    '''
     found=False
-    cus = input('Please enter your customer name:')
-    
-    for i in range(len(cclasslist)):
-        if(cclasslist[i].get_name() == cus):
-            cus = cclasslist[i]
-            found=True
-            break
-        
-    if not found:
-        print("no customer found")
-        exit()
-        
+    cus = input('Please enter your customer id:')
+    query1 = 'Select * from ACCOUNT where CusID=' + str(cus)
+
+    account = db.execute_read_query(connection, query1)
+    for i in range(len(account)):
+        print(str(account[i][0])+ " " + str(account[i][1]))
+
     print("Please select an account")
-    
-    acclist = cus.get_accountList()
-    
-    for i in range(len(acclist)):
-        
-        print(str(i)+": "+acclist[i].get_name())
-    
-    accid=input()
-    sdac = acclist[int(accid)]
+
+    AccID=input()
     
     
     
@@ -62,13 +68,13 @@ def day_1():
           ''' ))
 
         if choice == 1:
-            print(trfun.showbalance(sdac))
-            print("Your balance:  " + str(trfun.showbalance(sdac)))
+            print("Your balance:  " + str(trfun.showbalance(connection,AccID)[2]))
+            #print("Your balance:  " + str(trfun.showbalance(sdac)))
         elif choice == 2:
+
             withdrawamount = int(input("How much you want to withdraw:"))
-            if trfun.withdraw(withdrawamount,sdac):
-                print("Your balance:  " + str(trfun.showbalance(sdac)))
-                print("You withdraw" + str(withdrawamount))
+            if withdrawamount <= int(account[0][2]):
+                trfun.withdraw(connection,withdrawamount,int(account[0][2]),AccID)
             else:
                 print("Your withdrawal is not approved, not enough balance")
         elif choice == 3:
